@@ -1,0 +1,229 @@
+body {
+    background-color: #081c15;
+    color: #d8f3dc;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+form {
+    width: 50vw;
+    max-width:600px;
+    height:auto;
+    margin-left:auto;
+    margin-right:auto;
+}
+fieldset {
+    border: 1px solid;
+    margin: 10px 0;
+    padding: 20px;
+}
+
+fieldset legend {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+label {
+    font-size: 1.2rem;
+    display: block;
+}
+
+textarea{
+    width:98%;
+}
+
+h2,h3,h4,.series-menu>p,.stand-alone-menu>p{
+    margin: 5px;
+    color:#081c15;
+    padding: 10px;
+    border-radius:10px;
+    font-weight: 600;
+}
+
+h5,h6{
+    margin: 5px;
+    padding: 10px;
+    border-radius:10px;
+    font-weight: 900;  /*Somehow it refuses to get thicker and I want it thicker*/
+}
+
+h5 {
+    color:#fde74c;
+}
+
+a:link{
+    display:block;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius:10px;
+}
+#banner {
+  background-color: #F6BD60;
+  text-align: center;
+  /*position:fixed;
+  top: 0;*/
+}
+#ever-present {
+    color: #421d47;
+}
+
+#main, #upload{
+    background-color:#081c15;
+    color:#F6BD60;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+}
+
+#main .menu-title {
+    margin: 5px;
+    color:#F6BD60;
+    padding: 10px;
+    border-radius:10px;
+    font-weight: 600;
+}
+
+#main li {
+    background-color: #f6bd60db;
+    height: auto;
+    width: 97%;
+}
+
+#main a {
+     color: #081c15;
+}
+
+#upload {
+    text-align:left;
+}
+
+.menu {
+    margin-bottom: 10px;
+    padding: 2px 2px 5px 2px;
+    width: 15%;
+    height: auto;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px black;
+    text-align: center;
+    background-color: #d8f3dce9
+}
+
+.menu:hover{
+    transform: scale(1.1);
+}
+
+.menu ul{
+    list-style-type: none;
+}
+
+.menu li {
+    margin: 3px;
+    padding: 5px;
+    border-radius:5px;
+    font-weight: bolder;
+    background-color: #081c15;
+}
+
+.menu a {
+    color:#d8f3dce9;
+}
+
+.menu a:hover {
+    transform: scale(1.2);
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    height: auto;
+    width: auto;
+    max-width: 97%;
+}
+
+.card {
+    max-width: 400px;
+    padding:40px;
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px gray;
+    transition: transform 0.3s, background-color 0.3s ease;
+    text-align: center;
+}
+
+.card img{
+    max-width:380px;
+    width:90%;
+    height:auto;
+    margin: 0 auto;
+    border-radius:10px;
+    display: block;
+}
+
+.card:hover{
+    transform: scale(1.05);
+}
+
+.series-card{
+    color:#fde74c;
+    background-color: #e55934;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.series-card li{
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    height: auto;
+    width: auto;
+    max-width: 97%;
+    background-color: #fde74c;
+    box-sizing:border-box;
+    margin: 10px 20px 10px 10px;
+    padding:5px;
+    border-radius:5px;
+}
+
+.series-card a {
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    box-sizing:border-box;
+}
+
+.series-card a:hover{
+    transform: scale(1.1); /*I don't think i like this style, change all the hovers later*/
+}
+
+.series-card a:active{
+    /*I don't know yet*/
+}
+
+.series-card a:link{
+    text-decoration:none; /*why can't i get rid of the dots??*/
+    color: #e55934;
+    background-color: #fde74c;
+}
+
+.series-card a:visited {
+ color: #fde74c;
+    background-color: #e55a34e3;
+}
+
+.work-card,.index {
+    color:#7B542F;
+    background-color: #FFCF71;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.index {
+    margin: 15px auto;
+    max-width: 400px;
+    padding:40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px gray;
+    transition: transform 0.3s, background-color 0.3s ease;
+}
+
+.index p {
+    text-align:center;
+    font-weight: bold;
+}
+

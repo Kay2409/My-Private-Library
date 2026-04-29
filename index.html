@@ -1,0 +1,1164 @@
+<!--FUTURE-TO-DO:
+    1) It might be useful to add a category divided by temporary and kept. That way I can add works only to check them out or read them once and have the app eliminate them once they're marked as read/listened to, instead of having to worry about eliminating them individually. Maybe add a reminder that they're there if I take too long between downloading them and checking them out
+    2) Connect it to AI so it can note my tendencies and recommend playlists of works without compromising the order of the series of work chapters.
+    3) If it has AI, it might be useful for it to recommend new work I might be interested in once it notices a pattern and I ask for something new. Something new might be a good button to have. It can store that work in a temporary file like discussed in 1)-->
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="description" content="My Personal library">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="CSS/main.css">
+            
+            <title>My Personal Library</title>
+        </head>
+<!--BODY-->
+        <body>
+<!--Overall Header-->
+            <div id="banner">
+                <header id="ever-present">
+                    <h1>My Personal Library</h1>
+                    <p id="app-description">All my favorite works saved in one place for easy access!</p>
+<!--Here there should go the searchbar and the logos for account info, maybe a button that will take me to add new works, and one to prompt the app to search for new works I might enjoy taking into account my recent tendencies or using AI-->
+                </header>
+<!--MAIN MENU-->
+                <div class="menu" id="main">
+                    <p class="menu-title">My Medias</p>
+                    <nav>
+                        <ul>
+                            <li><a href="#my-audios">My audios</a></li>
+                            <li><a href="#my-books">My Books</a></li>
+                            <li><a href="#my-graphic-novels">My Graphic Novels</a></li>
+                        </ul>
+                    </nav>
+                </div>
+<!--The form is not main. Once I learn more, the form should be moved to another HTML. This form should only appear once I click the "add new work" button-->
+                <div class="upload" id="upload">
+                <!--Does this need id?-->
+                    <h2 class="form">Upload</h2>
+                    
+                    <button >New Work</button>
+                    <form class="new-work">
+                        <fieldset id="card-information">
+                            <legend>Card Information</legend>
+                            <label for="work-title">Work Title: </label>
+                            <input type="text" name="work-title" id="work-title" required>
+
+                            <label for="series-title">Series (if applicable): </label>
+                            <select id="series-title" name="series-title">
+                                <option value="Little-Women">Little Women</option>
+                                <option value="Ice-Cold-Brew">Ice Cold Brew</option>
+                            </select>
+
+                            <label for="new-series-title">New Series Title (If applicable): </label>
+                            <input type="text" name="new-series-title" id="new-series-title">
+
+                            <label for="work-author">Author: </label>
+                            <input type="text" name="author" id="work-author" required>
+
+                            <label for="work-reader">Reader (if applicable): </label>
+                            <input type="text" name="reader" id="work-reader">
+
+                            <label for="summary">Summary: </label>
+                            <textarea id="summary" cols="60" rows="5" name="summary" required></textarea>
+                        </fieldset>
+
+                        <fieldset id="new-work-location-data">
+                            <legend>Location Data</legend>
+                            <label for="media-type">Media Type:</label>
+                            <select id="media-type" name="media-type">
+                                <option value="audio">Audio</option>
+                                <option value="books">Books</option>
+                                <option value="graphic">Graphic</option>
+                            </select>
+
+                            <label for="origin">Origin</label>
+                            <select id="origin" name="origin">
+                                <option value="fandom">Fandom</option>
+                                <option value="original-work">Original Work</option>
+                            </select>
+    <!--How do i automatically add each new fandom entry into the options for select for universe? HTML, CSS or JS?-->
+                            <label for="universe">The Universe:</label>
+                            <select id="universe" name="universe" required>
+                                <option value="DC-Universe">DC Universe</option>
+                                <option value="Harry-Potter-Universe">Harry Potter Universe</option>
+                                <option value="Percy-Jackson-Universe">Percy Jackson Universe</option>
+                                <option value="Little-Women-Universe">Little Women Universe</option>
+                                <option value="I-Have-No-Mouth-And-I-Must-Scream-Universe">I Have No Mouth and I Must Scream</option>
+                                <option value="Dr-Jekyll-and-Mr-Hyde-Universe">Dr Jekyll and Mr Hyde Universe</option>
+                            </select>
+
+                            <label for="new-universe">New Universe Name (if applicable): </label>
+                            <input type="text" name="new-universe" id="new-universe"  placeholder="Harry Potter Universe">
+                        </fieldset>
+    <!--I should be able to convert a stand-alone into a series, if it turns out the author made it into a series later on. How do I do that? I'd like that here so I don't have to hunt down the work to convert it into series. Also, remember I am making things automatically stand-alone unless series specified, that's why there's no stand-alone input in location-data-->
+
+    <!--I should have a field here to upload the file of the new work-->
+                    </form>
+                    
+                    <button>New Chapter</button>
+                    <form class="new-chapter">
+                        <fieldset id="index">
+                            <legend>Index Information</legend>
+                            <label for="chapter-title">Chapter Title: </label>
+                            <input type="text" name="chapter-title" id="chapter-title" required>
+
+                            <label for="chapter-number">Chapter Number (if applicable):</label>
+                            <input type="number" name="chapter-number" id="chapter-number">
+    <!--Unless I specify chapter number, the new chapter should go as the last chapter of the work. -->
+                        </fieldset>
+
+                        <fieldset id="new-chapter-location-data">  
+                            <legend>Location Data</legend>
+                            <label for="existing-work">Existing Work: </label>
+                            <select id="existing-work" name="existing-work">
+                                <option value="Little-Women">Little Women</option>
+                                <option value="Good-Wives">Good Wives</option>
+                                <!--It'd take too long to add all the workds manually-->
+                            </select>
+                            <!--This form should also exist in the corner of every work card, so i can also add it directly there if i am interacting with the work-->
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+<!--My Audios-->
+            <section class="media-type" data-media-type="audio">
+                    <div  class= "menu origin-menu">
+                        <h2 class="media" data-media="audio" id="my-audios">My audios</h2>
+                        <nav>
+                            <ul>
+                                <li><a href="#audio-fandoms">The Fandoms</a></li>
+                                <li><a href="#audio-original-work">Original Work</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+<!--The categories-->
+                    <div class="categories">
+                        <div  class="menu category-menu">
+                            <h3 class="category" id="audio-fandoms">The Fandoms</h3>
+                            <nav>
+                                <ul>
+                                    <li><a href="#audio-DC-Universe">DC Universe</a></li>
+                                    <li><a href="#audio-Harry-Potter-Universe">Harry Potter Universe</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+<!--DC Universe-->
+                    <div  class="menu fandom-menu">
+                        <h4 id="audio-DC-Universe">DC Universe</h4>
+                        <nav>
+                            <ul>
+                                <li><a href="#audio-fandom-DC-Universe-series">Series</a></li>
+                                <li><a href="#audio-fandom-DC-Universe-stand-alone">Stand Alone</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+    <!--Series-->
+                    <div id="audio-fandom-DC-Universe-series">
+                        <div class="menu series-menu">
+                            <p>The Series</p>
+                            <nav>
+                                <ul>
+                                    <li><a href="#ice-cold-brew-series">Ice Cold Brew</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+        <!--ICE COLD BREW-->
+                        <article class="audio fandom series" data-series="ice-cold-brew" id="ice-cold-brew-series">
+                            <div  class="card series-card">
+                                <h5 class="series">Ice Cold Brew</h5>
+                                <img class="series-cover default-series-cover" src="Assets/Images/No-Cover/No-Series-Cover.jpg" alt="unfocused magazines dispersed around a yellow brown table">
+                                <p class="series-parts">The parts</p>
+                                <nav>    
+                                    <ul>
+                                        <li><a href="#ice-cold-podfic" class="series-part-link">Ice Cold</a></li>
+                                        <li><a href="#spacecase-podfic" class="series-part-link">Spacecase has changed Ghoul Gang Cool Gang to teh case of the gastly ghostys</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                                
+            <!--Ice Cold-->
+                            <div class="work podfic" data-author="Sendryl" data-reader="Flowerparrish-Pods-(Flowerparrish)">
+                                <div class="card work-card">
+                                    <h6 class="title" id="ice-cold-podfic">Ice Cold</h6>
+                                    <img src="Assets/Images/No-Cover/No-Work-Cover.jpg" alt="seen from eye-level, an old, yellowed-paged book left open over some white silky fabric" class="work-cover default-work-cover">
+                                    <div class="meta">
+                                        <p><strong>Written by:</strong> <span class="author">Sendryl</span></p>
+                                        <p><strong>Read by:</strong> <span class="reader">Flowerparrish Pods (Flowerparrish)</span></p>
+                                    </div>
+
+                                    <div class="summary">
+                                        <p>There's a heatwave in Gotham and Tim is suffering.</p>
+                                        <p>Danny's there to lend a helping hand, but uh.</p>
+                                        <p>Tim grabs hold. And won't let go.</p>
+                                        <p>This could be a problem, but Danny's just gonna roll with it and see what happens.</p>
+                                        <p>Maybe he'll even get a very hot guy's number at the end of the day.</p>
+                                    </div>
+                                </div>
+
+                                <div class="chapters">
+                                <div class="chapter">
+                                    <p>Chapter 1</p>
+                                    <audio controls>
+                                        <source src="Assets/Works/Audio/Podfic/DC-Universe/Series/Ice-Cold-Brew/01-Ice-Cold.mp3" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                                </div>
+                            </div>
+            <!--Spacecase-->
+                            <div class="work podfic" data-author="Sendryl" data-reader="Flowerparrish-Pods-(Flowerparrish)">
+                                <div class="card work-card">
+                                    <h6 class="title" id="spacecase-podfic">Spacecase has changed Ghoul Gang Cool Gang to teh case of the gastly ghostys</h6>
+                                    <img src="Assets/Images/No-Cover/No-Work-Cover.jpg" alt="seen from eye-level, an old, yellowed-paged book left open over some white silky fabric" class="work-cover default-work-cover">
+                                    <div class="meta">
+                                        <p><strong>Written by:</strong> <span class="author">Sendryl</span></p>
+                                        <p><strong>Read by:</strong> <span class="reader">Flowerparrish Pods (Flowerparrish)</span></p>
+                                    </div>
+
+                                    <div class="summary">
+                                        <p>A brief group chat interlude between Team Phantom.</p>
+                                        <p>In which Danny attempts to explain his current situation while one hand is occupied.</p>
+                                        <p>By Tim. The other hand is occupied by Tim.</p>
+                                    </div>
+                                </div>
+
+                                <div class="chapters">
+                                    <div class="chapter">
+                                        <p>Chapter 1</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Podfic/DC-Universe/Series/Ice-Cold-Brew/01-Spacecase.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </article>
+                    </div>
+    <!--Stand Alone-->
+                    <div id="audio-fandom-DC-Universe-stand-alone">
+                        <div class="menu stand-alone-menu">
+                            <p class="the-stories">The Stories</p>
+                            <nav>
+                                <ul>
+                                    <li><a href="#Imprint-podfic">Imprint</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+        <!--Imprint-->
+                        <article class="audio fandom stand-alone" data-stand-alone="Imprint">
+                            <div class="work podfic" data-author="Hashtag_Driveby_Writes" data-reader="UpstandingDelinquent">
+                                <div class="card work-card">
+                                    <h6 class="title" id="Imprint-podfic">Imprint</h6>
+                                    <img src="Assets/Images/No-Cover/No-Work-Cover.jpg" alt="seen from eye-level, an old, yellowed-paged book left open over some white silky fabric" class="work-cover default-work-cover">
+                                    <div class="meta">
+                                        <p><strong>Written by:</strong> <span class="author">Hashtag_Driveby_Writes</span></p>
+                                        <p><strong>Read by:</strong> <span class="reader">UpstandingDelinquent</span></p>
+                                    </div>
+
+                                    <div class="summary">
+                                        <p>He screwed his eyes shut, held his breath, desperately wished that he was back in his safehouse, alone and blissfully unaware. But the weight in his hands remained, and when he opened his eyes, it was to the bean-shaped 'fuck you' the Lazarus Pit had kindly bestowed upon him, arms and legs folded up against his front beneath off-white muslin while tiny lips smacked softly.</p>
+                                        <p>What the fuck.</p>
+                                        <p> the hell was Jason supposed to do now?</p>
+                                    </div>
+                                </div>
+                                                        
+                                <div class="chapters">
+                                    <div class="index">
+                                        <p>Chapters</p>
+                                        <nav>
+                                            <ul>
+                                                <li><a href="#01-Imprint">Chapter 1</a></li>
+                                                <li><a href="#02-Imprint">Chapter 2</a></li>
+                                                <li><a href="#03-Imprint">Chapter 3</a></li>
+                                                <li><a href="#04-Imprint">Chapter 4</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+
+                                    <div class="chapter" id="01-Imprint">
+                                        <p>Chapter 1</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Podfic/DC-Universe/Stand-Alone/Imprint/01-Imprint.mp3"  type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+
+                                    <div class="chapter" id="02-Imprint">
+                                        <p>Chapter 2</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Podfic/DC-Universe/Stand-Alone/Imprint/02-Imprint.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+
+                                    <div class="chapter" id="03-Imprint">
+                                        <p>Chapter 3</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Podfic/DC-Universe/Stand-Alone/Imprint/03-Imprint.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+
+                                    <div class="chapter" id="04-Imprint">
+                                        <p>Chapter 4</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Podfic/DC-Universe/Stand-Alone/Imprint/04-Imprint.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    </div>
+<!--Audiobooks-->
+                    <div class="menu original-work-menu">
+                        <h3 class="category" id="audio-original-work">Original Work</h3>
+                        <nav>
+                            <ul>
+                                <li><a href="#audio-original-work-series">Series</a></li>
+                                <li><a href="#audio-original-work-stand-alone">Stand Alone</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+<!--Series-->
+                    <div class="categories">
+                        <div id="audio-original-work-series">
+                            <div class="menu series-menu">
+                                <p class="the-series">The Series</p>
+                                <nav>
+                                    <ul>
+                                        <li><a href="#Little-Women-series">Little Women</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+    <!--Little Women-->
+                            <article class="audio original-work series" data-series="Little-Women" id="Little-Women-series">
+                                <div class="card series-card">
+                                    <h5 class="series">Little Women</h5>
+                                    <img class="series-cover default-series-cover" src="Assets/Images/No-Cover/No-Series-Cover.jpg" alt="unfocused magazines dispersed around a yellow brown table">
+                                        
+                                    <p class="series-parts">The parts</p>
+                                    <nav>
+                                        <ul>
+                                            <li><a href="#Little-Women-Audiobook" class="series-part-link">Little Women</a></li>
+                                            <li><a href="#Good-Wives-Audiobook" class="series-part-link">Good Wives</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+        <!--Little Women-->
+                                <div class="work audiobook" data-author="Louisa-May-Alcott" data-reader="Elizabeth-Klett">
+                                    <div class="card work-card">
+                                        <h6 class="title" id="Little-Women-Audiobook">Little Women</h6>
+                                        <img src="Assets/Images/No-Cover/No-Work-Cover.jpg" alt="seen from eye-level, an old, yellowed-paged book left open over some white silky fabric" class="work-cover default-work-cover">
+                                        <div class="meta">
+                                            <p><strong>Written by:</strong> Louisa May Alcott</p>
+                                            <p><strong>Read by:</strong> Elizabeth Klett</p>
+                                        </div>
+
+                                        <div class="summary">
+                                            <p>Louisa May Alcott's beloved 1868 novel is about the four March girls - Meg, Jo, Beth, and Amy - who are growing up in Massachusetts during the Civil War. As the novel opens, their father is away at war, and the girls are struggling to be good and to reconcile themselves to their relative poverty. Each has her trials to deal with, and they are encouraged by their loving mother, and by their friendship with their neighbor, Theodore "Laurie" Laurence.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="chapters">
+                                        <div class="index">
+                                            <p>Chapters</p>
+                                            <nav>
+                                                <ul>
+                                                    <li><a href="#00-Little-Women">Introduction</a></li>
+                                                    <li><a href="#01-Little-Women">Playing Pilgrims</a></li>
+                                                    <li><a href="#02-Little-Women">A Merry Christmas</a></li>
+                                                    <li><a href="#03-Little-Women">The Laurence Boy</a></li>
+                                                    <li><a href="#04-Little-Women">Burdens</a></li>
+                                                    <li><a href="#05-Little-Women">Being Neighborly</a></li>
+                                                    <li><a href="#06-Little-Women">Beth Finds The Palace Beautiful</a></li>
+                                                    <li><a href="#07-Little-Women">Amy's Valley of humiliation</a></li>
+                                                    <li><a href="#08-Little-Women">Jo Meets Apollyon</a></li>
+                                                    <li><a href="#09-Little-Women">Meg Goes to Vanity Fair</a></li>
+                                                    <li><a href="#10-Little-Women">The P.C. and P.O.</a></li>
+                                                    <li><a href="#11-Little-Women">Experiments</a></li>
+                                                    <li><a href="#12-Little-Women">Camp Laurence</a></li>
+                                                    <li><a href="#13-Little-Women">Castles in the Air</a></li>
+                                                    <li><a href="#14-Little-Women">Secrets</a></li>
+                                                    <li><a href="#15-Little-Women">A Telegram</a></li>
+                                                    <li><a href="#16-Little-Women">Letters</a></li>
+                                                    <li><a href="#17-Little-Women">Little Faithful</a></li>
+                                                    <li><a href="#18-Little-Women">Dark Days</a></li>
+                                                    <li><a href="#19-Little-Women">Amy's Will</a></li>
+                                                    <li><a href="#20-Little-Women">Confidential</a></li>
+                                                    <li><a href="#21-Little-Women">Laurie Makes Mischief, and Jo Makes Peace</a></li>
+                                                    <li><a href="#22-Little-Women">Pleasant Meadows</a></li>
+                                                    <li><a href="#23-Little-Women">Aunt March Settles the Question</a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="00-Little-Women">Introduction</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/00-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="01-Little-Women">Playing Pilgrims</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/01-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="02-Little-Women">A Merry Christmas</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/02-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="03-Little-Women">The Laurence Boy</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/03-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="04-Little-Women">Burdens</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/04-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="05-Little-Women">Being Neighborly</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/05-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="06-Little-Women">Beth Finds The Palace Beautiful</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/06-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="07-Little-Women">Amy's Valley of Humiliation</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/07-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="08-Little-Women">Jo Meets Apollyon</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/08-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="09-Little-Women">Meg Goes to Vanity Fair</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/09-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="10-Little-Women">The P.C. and P.O.</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/10-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="11-Little-Women">Experiments</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/11-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="12-Little-Women">Camp Laurance</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/12-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="13-Little-Women">Castles in the Air</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/13-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="14-Little-Women">Secrets</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/14-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="15-Little-Women">A Telegram</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/15-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="16-Little-Women">Letters</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/16-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="17-Little-Women">Little Faithful</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/17-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="18-Little-Women">Dark Days</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/18-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="19-Little-Women">Amy's Will</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/19-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="20-Little-Women">Confidential</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/20-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="21-Little-Women">Laurie Makes Mischief, and Jo Makes Peace</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/21-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="22-Little-Women">Pleasant Meadows</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/22-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                            <p id="23-Little-Women">Aunt March Settles the Question</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/01-Little-Women/23-Little-Women.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="work audiobook" data-author="Louisa-May-Alcott" data-reader="Elizabeth-Klett">
+                                    <div class="card work-card">
+                                        <h6 class="title" id="Good-Wives-Audiobook">Good Wives</h6>
+                                        <img src="Assets/Images/No-Cover/No-Work-Cover.jpg" alt="seen from eye-level, an old, yellowed-paged book left open over some white silky fabric" class="work-cover default-work-cover">
+                                        <div class="meta">
+                                            <p><strong>Written by:</strong> Louisa May Alcott</p>
+                                            <p><strong>Read by:</strong> Elizabeth Klett</p>
+                                        </div>
+
+                                        <div class="summary">
+                                            <p>Originally published in 1869 as a separate, Good Wives picks up three years after Little Women ends. It follows the March sisters as they transition from "little girls" to young women navigating the complexities of adulthood.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="chapters">
+                                        <div class= "index">
+                                            <p>Chapters</p>
+                                            <nav>
+                                                <ul>
+                                                        <li><a href="#01-Good-Wives">Gossip</a></li>
+                                                        <li><a href="#02-Good-Wives">The First Wedding</a></li>
+                                                        <li><a href="#03-Good-Wives">Artistic Attempts</a></li>
+                                                        <li><a href="#04-Good-Wives">Literary Lessons</a></li>
+                                                        <li><a href="#05-Good-Wives">Domestic Experiences</a></li>
+                                                        <li><a href="#06-Good-Wives">Calls</a></li>
+                                                        <li><a href="#07-Good-Wives">Consequences</a></li>
+                                                        <li><a href="#08-Good-Wives">Our Foreign Correspondent</a></li>
+                                                        <li><a href="#09-Good-Wives">Tender Troubles</a></li>
+                                                        <li><a href="#10-Good-Wives">Jo's Journal</a></li>
+                                                        <li><a href="#11-Good-Wives">A Friend</a></li>
+                                                        <li><a href="#12-Good-Wives">Heartache</a></li>
+                                                        <li><a href="#13-Good-Wives">Beth's Secret</a></li>
+                                                        <li><a href="#14-Good-Wives">New Impressions</a></li>
+                                                        <li><a href="#15-Good-Wives">On the Shelf</a></li>
+                                                        <li><a href="#16-Good-Wives">Lazy Laurance</a></li>
+                                                        <li><a href="#17-Good-Wives">The Valley of the Shadow</a></li>
+                                                        <li><a href="#18-Good-Wives">Learning to Forget</a></li>
+                                                        <li><a href="#19-Good-Wives">All Alone</a></li>
+                                                        <li><a href="#20-Good-Wives">Surprises</a></li>
+                                                        <li><a href="#21-Good-Wives">My Lord and Lady</a></li>
+                                                        <li><a href="#22-Good-Wives">Daisy and Demi</a></li>
+                                                        <li><a href="#23-Good-Wives">Under the Umbrella</a></li>
+                                                        <li><a href="#24-Good-Wives">Harvest Time</a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+
+                                            <div class="chapter">
+                                            <p id="01-Good-Wives">Gossip</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/01-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="02-Good-Wives">The First Wedding</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/02-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="03-Good-Wives">Artistic Attempts</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/03-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="04-Good-Wives">Literary Lessons</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/04-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="05-Good-Wives">Domestic Experiences</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/05-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="06-Good-Wives">Calls</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/06-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="07-Good-Wives">Consequences</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/07-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="08-Good-Wives">Our Foreign Correspondent</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/08-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="09-Good-Wives">Tender Troubles</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/09-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="10-Good-Wives">Jo's Journal.</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/10-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="11-Good-Wives">A Friend</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/11-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p  id="12-Good-Wives">Heartache</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/12-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p  id="13-Good-Wives">Beth's Secret</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/13-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p  id="14-Good-Wives">New Impressions</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/14-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p  id="15-Good-Wives">On the Shelf</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/15-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="16-Good-Wives">Lazy Laurance</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/16-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p  id="17-Good-Wives">The Valley of the Shadows</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/17-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+                                          
+                                            <div class="chapter">
+                                            <p  id="18-Good-Wives">Learning to Forget</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/18-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="19-Good-Wives">All Alone</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/19-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p id="20-Good-Wives">Surprises</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/20-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p  id="21-Good-Wives">My Lord and Lady</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/21-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p  id="22-Good-Wives">Daisy and Demi</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/22-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p  id="23-Good-Wives">Under the Umbrella</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/23-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+
+                                            <div class="chapter">
+                                            <p  id="24-Good-Wives">Harvest Time</p>
+                                            <audio controls>
+                                                <source src="Assets/Works/Audio/Original-Work/Series/Little-Women/02-Good-Wives/24-Good-Wives.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+<!--Stand Alone-->
+                        <div id="audio-original-work-stand-alone">
+                            <div class="menu stand-alone-menu">
+                                <p>The Stories</p>
+                                <nav>
+                                    <ul>
+                                        <li><a href="#Dr-Jekyll-and-Mr-Hyde">Dr Jekyll and Mr Hyde</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+    <!--Dr Jekyll and Mr Hyde-->
+                            <article class="audio original-work stand-alone">   
+                                <div class="work audiobook" data-author="Robert-Louis-Stevenson" data-reader="Phil-Chenevert">
+                                    <div class="card work-card">
+                                        <h6 class="title" id="Dr-Jekyll-and-Mr-Hyde">Dr Jekyll and Mr Hyde</h6>
+                                        <img src="Assets/Images/Covers/01-The-Strange-Case-of-Dr-Jekyll-and-Mr-Hyde.jpg" alt="in black and white, a man dressed in a suit and wearing a top-hat walking down a cobbled street, the shade of it creates a shadow of him depicting him as a bigger, more sinester, creature. Over it, on top, it says: The Strange Case of Dr Jekyll and Mr Hyde. On the bottom: Robert Louis Stevenson, the name of the author." class="work-cover default-work-cover">       
+                                        <div class="meta">
+                                            <p><strong>Written by:</strong> Robert Louis Stevenson</p>
+                                            <p><strong>Read by:</strong> Phil Chenevert</p>
+                                        </div>
+
+                                        <div class="summary">
+                                            <p>This story deals with the obvious fact that we humans are split, dual. We have urges to do the 'right' thing, to be honorable and wise, but we also frequently fail to follow these better instincts and follow instead urges to do dishonorable, evil things. We seem to battle within ourselves. Are we really composed of two different personalities housed within the same brain, within the same person? Dr Jekyll in this story is so convinced and manages by scientific means to actually split himself into his ordinary composite self, and his evil self whom he calls Mr. Hyde. The horror of this unnatural split is well documented here and shows what might happen were this possible. (summary by phil chenevert)</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="chapters">
+                                        <div class="index">
+                                            <p>Chapters</p>
+                                            <nav>
+                                                <ul>
+                                                    <li><a href="#01-Dr-Jekyll-and-Mr-Hyde">Story of the Door</a></li>
+                                                    <li><a href="#02-Dr-Jekyll-and-Mr-Hyde">Search for Mr Hyde</a></li>
+                                                    <li><a href="#03-Dr-Jekyll-and-Mr-Hyde">Dr Jekyll was Quite at Ease</a></li>
+                                                    <li><a href="#04-Dr-Jekyll-and-Mr-Hyde">The Carew Murder Case</a></li>
+                                                    <li><a href="#05-Dr-Jekyll-and-Mr-Hyde">Incident of the Letter</a></li>
+                                                    <li><a href="#06-Dr-Jekyll-and-Mr-Hyde">Remarkable Incident of Dr Lanyon</a></li>
+                                                    <li><a href="#07-Dr-Jekyll-and-Mr-Hyde">Incident at the Window</a></li>
+                                                    <li><a href="#08-Dr-Jekyll-and-Mr-Hyde">The Last Night</a></li>
+                                                    <li><a href="#09-Dr-Jekyll-and-Mr-Hyde">Dr Lanyon's Narrative</a></li>
+                                                    <li><a href="#10-Dr-Jekyll-and-Mr-Hyde">Henry Jekyll's Full Statement of the Case</a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+
+                                        <div class="chapter">
+                                        <p id="01-Dr-Jekyll-and-Mr-Hyde">Story of the Door</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Original-Work/Stand-Alone/Dr-Jekyll-and-Mr-Hyde/01-Dr-Jekyll-and-Mr-Hyde.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                        <p id="02-Dr-Jekyll-and-Mr-Hyde">Search for Mr Hyde</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Original-Work/Stand-Alone/Dr-Jekyll-and-Mr-Hyde/02-Dr-Jekyll-and-Mr-Hyde.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                        <p id="03-Dr-Jekyll-and-Mr-Hyde">Dr Jekyll Was Quite at Ease</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Original-Work/Stand-Alone/Dr-Jekyll-and-Mr-Hyde/03-Dr-Jekyll-and-Mr-Hyde.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                        <p id="04-Dr-Jekyll-and-Mr-Hyde">The Carew Murder Case</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Original-Work/Stand-Alone/Dr-Jekyll-and-Mr-Hyde/04-Dr-Jekyll-and-Mr-Hyde.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                        <p id="05-Dr-Jekyll-and-Mr-Hyde">Incident of the Letter</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Original-Work/Stand-Alone/Dr-Jekyll-and-Mr-Hyde/05-Dr-Jekyll-and-Mr-Hyde.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                        <p id="06-Dr-Jekyll-and-Mr-Hyde">Remarkable Incident of Dr Lanyon</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Original-Work/Stand-Alone/Dr-Jekyll-and-Mr-Hyde/06-Dr-Jekyll-and-Mr-Hyde.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                        <p id="07-Dr-Jekyll-and-Mr-Hyde">Incident at the Window</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Original-Work/Stand-Alone/Dr-Jekyll-and-Mr-Hyde/07-Dr-Jekyll-and-Mr-Hyde.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                        <p id="08-Dr-Jekyll-and-Mr-Hyde">The Last Night</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Original-Work/Stand-Alone/Dr-Jekyll-and-Mr-Hyde/08-Dr-Jekyll-and-Mr-Hyde.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                        <p id="09-Dr-Jekyll-and-Mr-Hyde">Dr Lanyon's Narrative</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Original-Work/Stand-Alone/Dr-Jekyll-and-Mr-Hyde/09-Dr-Jekyll-and-Mr-Hyde.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        </div>
+
+                                        <div class="chapter">
+                                        <p id="10-Dr-Jekyll-and-Mr-Hyde">Henry Jekyll's Full Statement of the Case</p>
+                                        <audio controls>
+                                            <source src="Assets/Works/Audio/Original-Work/Stand-Alone/Dr-Jekyll-and-Mr-Hyde/10-Dr-Jekyll-and-Mr-Hyde.mp3" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+            </section>
+<!--Books!-->
+            <section class="media-type" data-media-type="text">
+                <div class="menu origin-menu">
+                    <h2 class="media" data-media="text" id="my-books">My Books</h2>
+                    <nav>
+                        <ul>
+                            <li><a href="#text-fandoms">The Fandoms</a></li>
+                            <li><a href="#text-original-work">Original Work</a></li>
+                        </ul>
+                    </nav>
+                </div>
+<!--Overall Categories-->
+                <div class="categories">
+                    <div class="menu category-menu">           
+                        <h3 class="category" id="text-fandoms">The Fandoms</h3>
+                        <nav>
+                            <ul>
+                                <li><a href="#text-fandom-Percy-Jackson">Percy Jackson</a></li>
+                                <li><a href="#text-fandom-DC-Universe">DC Universe</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+<!--Percy Jackson-->
+                    <div class="menu fandom-menu">
+                        <h4 id="text-fandom-Percy-Jackson">Percy Jackson</h4>
+                        <nav>
+                            <ul>
+                                <li><a href="#text-fandom-Percy-Jackson-stand-alone">Stand Alone</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+<!--Stand Alone--> 
+                    <div id="text-fandom-Percy-Jackson-stand-alone">
+                        <div class="menu stand-alone-menu">
+                            <p>The Fics</p>
+                            <nav>
+                                <ul>
+                                    <li><a href="#I-am-not-what-I-expected-fanfic">I am not what I expected (The poison just didn't take)</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <article>
+                            <div class="fanfic" data-author="dcninja">
+                                <div class="card work-card">
+                                    <h6 class="title" id="I-am-not-what-I-expected-fanfic">I am not what I expected (The poison just didn't take)</h6>
+                                    <img src="Assets/Images/No-Cover/No-Work-Cover.jpg" alt="seen from eye-level, an old, yellowed-paged book left open over some white silky fabric" class="work-cover default-work-cover">
+                                    <div class="meta">
+                                        <p><strong>Written by:</strong> <span class="author">dcninja</span></p>
+                                    </div>
+
+                                    <div class="summary">
+                                        <p>After the War against Gaea, Percy finds himself struggling in the life he worked so hard to get back to. The more he tries to fit back in, pushing down his powers and emotions after the war, the more things seem to fall apart. As Olympus prepares to officially reopen at the Winter Solstice, Hermes takes notice that something is off with the Savior of Olympus. But when he asked for help from Hades, none of them could imagine what Percy’s trip to the Pit led to and what it will mean for the hero.</p>
+
+                                        <p>Or Percy finally reckons with the consequences of challenging Akhlys with a little help from his immortal family, who he might be around for a lot longer than he thought.</p>
+                                    </div>
+                                </div>
+
+                                <div class="chapters">
+                                    <div class="chapter">
+                                    <p>Chapter 1</p>
+                                    <iframe width="100%" height="600px" src="Assets/Works/Books/Fanfic/PDF/01-I-am-not-what-I-expected.pdf">
+                                    </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+<!--DC Universe-->
+                    <div class="menu fandom-menu">
+                        <h4 id="text-fandom-DC-Universe">DC Universe</h4>
+                        <nav>
+                            <ul>
+                                <li><a href="#text-fandom-DC-Universe-series">The Series</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div class="menu series-menu">
+                        <p>The Series</p>
+                        <nav>
+                            <ul>
+                                <li><a href="#He-Smiled-Like-His-Father-series">He Smiled Like His Father</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <article class="series" data-series="He-Smiled-Like-His-Father" id="He-Smiled-Like-His-Father-series">
+                        <div class="card series-card">
+                            <h5 class="series">He Smiled Like His Father</h5>
+                            <img class="series-cover default-series-cover" src="Assets/Images/No-Cover/No-Series-Cover.jpg" alt="unfocused magazines dispersed around a yellow brown table">
+                                
+                            <div class="summary">
+                                <p>Post Ultimate Enemy with no time reversal, Danny takes up a role as Clockwork and the Observants' hand in the time stream, nudging it in the right direction. Clearly he's bad at his job, because he ends up ditching it to take this random kid to find his dad when he finds him in a League base. This has consequences of the adoption variety.</p>
+                                <p>All titles are taken from songs from the musical Natasha, Pierre, and the Great Comet of 1812 (series title from Pierre and Andrey). This musical does not have anything to do with the fic, I just like the lyrics.</p>
+                            </div>
+
+                            <div>
+                                <p>The parts</p>
+                                <nav>
+                                    <ul>
+                                        <li><a href="#And-I-Stare-Like-a-Hunted,-Wounded-Animal-fanfic" class="series-part-link">And I Stare Like a Hunted, Wounded Animal</a></li>
+                                        <li><a href="#Please-Come-See-Us-Again-fanfic" class="series-part-link">Please Come See Us Again</a></li>
+                                        <li><a href="#To-and-Fro-fanfic" class="series-part-link">To and Fro</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+            <!--And I Stare Like a Hunted, Wounded Animal-->
+                        <div class="fanfic" data-author="Totally_Here">
+                            <div class="card work-card">
+                                <h6 class="title" id="And-I-Stare-Like-a-Hunted,-Wounded-Animal-fanfic">And I Stare Like a Hunted, Wounded Animal</h6>
+                                <img src="Assets/Images/No-Cover/No-Work-Cover.jpg" alt="seen from eye-level, an old, yellowed-paged book left open over some white silky fabric" class="work-cover default-work-cover">
+                                <div class="meta">
+                                    <p><strong>Written by:</strong> <span class="author">Totally_Here</span></p>
+                                </div>
+
+                                <div class="summary">
+                                    <p>Danny is adrift. After the explosion and running away from Vlad, his only real guiding point has been doing favors for Clockwork. But even then, he's more restless than before. A request to retrieve a sample from a Lazarus Pit and a chance encounter with a victim of the league who holds it gives Danny a new guiding point for his life. And he follows it without looking back.</p>
+
+                                    <p>Or: Respawn and Danny go on a road trip, and eventually find their way home.</p>
+                                </div>
+                            </div>
+
+                            <div class="chapters">
+                                <div class="chapter">
+                                    <p>Chapter 1</p>
+                                    <iframe width="100%" height="600px" src="Assets/Works/Books/Fanfic/PDF/01-And-I-Stare-Like-a-Hunted-Wounded.pdf">
+                                        Your browser does not support the graphic element.
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                </div>
+<!--The Categories-->
+                <div class="categories">
+                    <div class="menu category-menu">           
+                        <h3 class="category" id="text-original-works">Original Work</h3>
+                    </div>
+                </div>
+            </section>
+
+            <section class="media-type" data-media-type="comic manga">
+                <div class= "menu origin-menu">
+                    <h2 class="media" data-media="comic manga" id="my-graphic-novels">My Graphic Novels</h2>
+                    <nav>
+                        <ul>
+                            <li><a href="#graphic-novels-fandoms">The Fandoms</a></li>
+                            <li><a href="#graphic-novels-original-work">Original Work</a></li>
+                        </ul>
+                    </nav>
+                </div>
+<!--Overall Categories-->
+                <div class="categories">
+                    <div class="menu fandom-menu">
+                        <h3 class="category" id="graphic-novels-fandoms">The Fandoms</h3>
+                    </div>
+
+                    <div class="menu original-work-menu">
+                        <h3 class="category" id="graphic-novels-original-work">Original Work</h3>
+                        <nav>
+                            <ul>
+                                <li><a href="#I-Have-No-Mouth-And-I-Must-Scream">I Have No Mouth and I Must Scream</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+    <!--I Have No Mouth And I Must Scream-->
+                    <article class="comic original-work stand-alone">
+                        <div class="work" data-author="Harlan Ellison">
+                            <div class="card work-card">
+                                <h4 class="title" id="I-Have-No-Mouth-And-I-Must-Scream">I Have No Mouth And I Must Scream</h4>
+                                <img src="Assets/Images/No-Cover/No-Work-Cover.jpg" alt="seen from eye-level, an old, yellowed-paged book left open over some white silky fabric" class="work-cover default-work-cover">
+                                <div class="meta">
+                                    <p><strong>Written by:</strong> <span class="author">Harlan Ellison</span></p>
+                                </div>
+
+                                <div class="summary">
+                                    <p>I Have No Mouth, and I Must Scream is a bleak 1967 sci-fi horror story by Harlan Ellison. A sentient supercomputer, AM, annihilates humanity but keeps five people alive, tormenting them for eternity in a subterranean hell. The plot follows these survivors' desperate, hopeless journey for food, exploring themes of existential despair and humanity's powerlessness against a cruel, omnipotent AI.</p>
+                                </div>
+                            </div>
+                        
+                            <div class="chapters">
+                                <div class="chapter">
+                                    <p>Chapter 1</p>
+                                    <iframe width="100%" height="600px" src="Assets/Works/Graphic-Novels/Original-Work/I-Have-No-Mouth-And-I-Must-Scream.pdf">
+                                        Your browser does not support the graphic element.
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            
+            </main>
+        </body>
+    </html>
