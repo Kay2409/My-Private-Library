@@ -7,7 +7,7 @@
         <head>
             <meta charset="utf-8">
             <meta name="description" content="My Personal library">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, user-scalable=yes">
             <link rel="stylesheet" href="CSS/main.css">
             
             <title>My Personal Library</title>
@@ -21,24 +21,26 @@
                     <p id="app-description">All my favorite works saved in one place for easy access!</p>
 <!--Here there should go the searchbar and the logos for account info, maybe a button that will take me to add new works, and one to prompt the app to search for new works I might enjoy taking into account my recent tendencies or using AI-->
                 </header>
+            </div>
 <!--MAIN MENU-->
-                <div class="menu" id="main">
-                    <p class="menu-title">My Medias</p>
-                    <nav>
-                        <ul>
-                            <li><a href="#my-audios">My audios</a></li>
-                            <li><a href="#my-books">My Books</a></li>
-                            <li><a href="#my-graphic-novels">My Graphic Novels</a></li>
-                        </ul>
-                    </nav>
+            <div id="sidebar">
+                <div id="main">
+                <p class="menu-title">My Medias</p>
+                <nav>
+                    <ul>
+                        <li><a href="#my-audios">My audios</a></li>
+                        <li><a href="#my-books">My Books</a></li>
+                        <li><a href="#my-graphic-novels">My Graphic Novels</a></li>
+                    </ul>
+                </nav>
                 </div>
 <!--The form is not main. Once I learn more, the form should be moved to another HTML. This form should only appear once I click the "add new work" button-->
                 <div class="upload" id="upload">
-                <!--Does this need id?-->
+            <!--Does this need id?-->
                     <h2 class="form">Upload</h2>
                     
                     <button >New Work</button>
-                    <form class="new-work">
+                    <!--<form class="new-work">
                         <fieldset id="card-information">
                             <legend>Card Information</legend>
                             <label for="work-title">Work Title: </label>
@@ -76,9 +78,9 @@
                             <select id="origin" name="origin">
                                 <option value="fandom">Fandom</option>
                                 <option value="original-work">Original Work</option>
-                            </select>
+                            </select> -->
     <!--How do i automatically add each new fandom entry into the options for select for universe? HTML, CSS or JS?-->
-                            <label for="universe">The Universe:</label>
+                            <!--<label for="universe">The Universe:</label>
                             <select id="universe" name="universe" required>
                                 <option value="DC-Universe">DC Universe</option>
                                 <option value="Harry-Potter-Universe">Harry Potter Universe</option>
@@ -90,35 +92,35 @@
 
                             <label for="new-universe">New Universe Name (if applicable): </label>
                             <input type="text" name="new-universe" id="new-universe"  placeholder="Harry Potter Universe">
-                        </fieldset>
+                        </fieldset> -->
     <!--I should be able to convert a stand-alone into a series, if it turns out the author made it into a series later on. How do I do that? I'd like that here so I don't have to hunt down the work to convert it into series. Also, remember I am making things automatically stand-alone unless series specified, that's why there's no stand-alone input in location-data-->
 
     <!--I should have a field here to upload the file of the new work-->
-                    </form>
+                  <!--  </form> -->
                     
                     <button>New Chapter</button>
-                    <form class="new-chapter">
+                   <!-- <form class="new-chapter">
                         <fieldset id="index">
                             <legend>Index Information</legend>
                             <label for="chapter-title">Chapter Title: </label>
                             <input type="text" name="chapter-title" id="chapter-title" required>
 
                             <label for="chapter-number">Chapter Number (if applicable):</label>
-                            <input type="number" name="chapter-number" id="chapter-number">
+                            <input type="number" name="chapter-number" id="chapter-number"> -->
     <!--Unless I specify chapter number, the new chapter should go as the last chapter of the work. -->
-                        </fieldset>
+                       <!-- </fieldset>
 
                         <fieldset id="new-chapter-location-data">  
                             <legend>Location Data</legend>
                             <label for="existing-work">Existing Work: </label>
                             <select id="existing-work" name="existing-work">
                                 <option value="Little-Women">Little Women</option>
-                                <option value="Good-Wives">Good Wives</option>
+                                <option value="Good-Wives">Good Wives</option> -->
                                 <!--It'd take too long to add all the workds manually-->
-                            </select>
+                           <!-- </select> -->
                             <!--This form should also exist in the corner of every work card, so i can also add it directly there if i am interacting with the work-->
-                        </fieldset>
-                    </form>
+                      <!--  </fieldset>
+                    </form> -->
                 </div>
             </div>
 <!--My Audios-->
@@ -260,7 +262,7 @@
                                     <div class="summary">
                                         <p>He screwed his eyes shut, held his breath, desperately wished that he was back in his safehouse, alone and blissfully unaware. But the weight in his hands remained, and when he opened his eyes, it was to the bean-shaped 'fuck you' the Lazarus Pit had kindly bestowed upon him, arms and legs folded up against his front beneath off-white muslin while tiny lips smacked softly.</p>
                                         <p>What the fuck.</p>
-                                        <p> the hell was Jason supposed to do now?</p>
+                                        <p>What the hell was Jason supposed to do now?</p>
                                     </div>
                                 </div>
                                                         

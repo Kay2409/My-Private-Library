@@ -1,229 +1,338 @@
-body {
-    background-color: #081c15;
-    color: #d8f3dc;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+html{
+    scroll-behavior: smooth;
+}
 
+body{
+    background-color: #D8F3DC;
+    color: #081C15;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0; 
+}
+
+#banner {
+    display:flex;
+    background-color: #1a1a2e;
+    color: #F6BD60;
+    text-align: center;
+    padding: 20px 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#ever-present{
+    width: 100%;
+    text-align: center;
+}
+
+#sidebar{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #1a1a2e;
+    max-width: 20%;
+}
+
+#main .menu-title, #main > nav > ul > li {
+    margin-bottom: 10px;
+}
+
+.menu-title {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #F6BD60;
+    color: #1a1a2e;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 2px;
+    transition: transform 0.3s ease;
+}
+
+
+.menu-title:hover {
+    background-color: #E4F660;
+    color: #3d0000;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.menu-title:active {
+    background-color: #E4F660;
+    color: #3d0000;
+}   
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+#main > nav > ul > li > a {
+    background-color: #F6BD60;
+    color: #1a1a2e;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+#main > nav > ul > li > a:link {
+    text-decoration: none;
+}
+
+#main > nav > ul > li > a:visited {
+    text-decoration: none;
+    background-color: #E4F660;
+    color: #3d0000;
+}
+
+#main > nav > ul > li > a:hover {
+    background-color: #E4F660;
+    color: #3d0000;
+    transform: scale(1.05);
+
+}
+
+#main > nav > ul > li > a:active {
+    background-color: #E4F660;
+    color: #3d0000;
+}
+
+#upload{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color:#1a1a2e ;
+    font-size: 16px;
+    font-weight: bold;
+    color: #F6BD60;
+    max-width: 20%;
+}
+
+#upload h2{
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #F6BD60;
+    color: #1a1a2e;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 2px;
+    transition: transform 0.3s ease;
+}
+
+#upload button {
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #F6BD60;
+    color: #1a1a2e;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 2px;
+    transition: transform 0.3s ease;
+}
+
+
+#upload h2:hover, #upload button:hover {
+    background-color: #E4F660;
+    color: #3d0000;
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
 
 form {
-    width: 50vw;
-    max-width:600px;
-    height:auto;
-    margin-left:auto;
-    margin-right:auto;
+    width: 100%;
+    max-width: 500px;
 }
+
+
 fieldset {
-    border: 1px solid;
-    margin: 10px 0;
-    padding: 20px;
+  border: 1px solid #F6BD60;
+  width: 80%;
+  margin: 0 auto 10px auto;
+  max-width: 600px;
+  padding: 10px 0 0 5px;
+  border-radius: 10px;
 }
 
-fieldset legend {
-    font-size: 1.3rem;
-    font-weight: 600;
+legend {
+  border-bottom: 4px solid #F6BD60;
+  margin-top: 0;
+  padding-top: 0;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  color: #F6BD60;
 }
 
-label {
-    font-size: 1.2rem;
+label, input, textarea, select{
+    box-sizing: border-box;
+    width: 96%;
+    max-width: 500px;
+    margin: 10px auto 15px auto;
     display: block;
+    border-radius: 5px;
 }
 
-textarea{
-    width:98%;
+/*This new code moved my #main to the middle of the screen, why?*/
+
+.media-type {
+    width: 100%;
+    max-width: 1200px;
+    margin: 10px auto 15px auto;
+    display: block;
+    border-radius: 5px;
+    background-color: #D8F3DC;
+    color: #081C15;
 }
 
-h2,h3,h4,.series-menu>p,.stand-alone-menu>p{
-    margin: 5px;
-    color:#081c15;
-    padding: 10px;
-    border-radius:10px;
-    font-weight: 600;
-}
-
-h5,h6{
-    margin: 5px;
-    padding: 10px;
-    border-radius:10px;
-    font-weight: 900;  /*Somehow it refuses to get thicker and I want it thicker*/
-}
-
-h5 {
-    color:#fde74c;
-}
-
-a:link{
-    display:block;
-    text-decoration: none;
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius:10px;
-}
-#banner {
-  background-color: #F6BD60;
-  text-align: center;
-  /*position:fixed;
-  top: 0;*/
-}
-#ever-present {
-    color: #421d47;
-}
-
-#main, #upload{
-    background-color:#081c15;
-    color:#F6BD60;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 10px;
-}
-
-#main .menu-title {
-    margin: 5px;
-    color:#F6BD60;
-    padding: 10px;
-    border-radius:10px;
-    font-weight: 600;
-}
-
-#main li {
-    background-color: #f6bd60db;
-    height: auto;
-    width: 97%;
-}
-
-#main a {
-     color: #081c15;
-}
-
-#upload {
-    text-align:left;
-}
+/*Does audio have a specific style? think about that later*/
 
 .menu {
-    margin-bottom: 10px;
-    padding: 2px 2px 5px 2px;
-    width: 15%;
-    height: auto;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px black;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto 15px auto;
+    display: block;
+    border-radius: 5px;
+    background-color: #081C15;
+    color: #B7E4C7;
     text-align: center;
-    background-color: #d8f3dce9
-}
-
-.menu:hover{
-    transform: scale(1.1);
-}
-
-.menu ul{
-    list-style-type: none;
-}
-
-.menu li {
-    margin: 3px;
-    padding: 5px;
-    border-radius:5px;
-    font-weight: bolder;
-    background-color: #081c15;
 }
 
 .menu a {
-    color:#d8f3dce9;
+    background-color: #B7E4C7;
+    color: #081C15;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.menu a:link {
+    text-decoration: none;
+}
+
+.menu a:visited {
+    text-decoration: none;
+    background-color: #95D5B2;
+    color: #081C15;
 }
 
 .menu a:hover {
-    transform: scale(1.2);
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-    height: auto;
-    width: auto;
-    max-width: 97%;
+    background-color: #98aa9a;
+    color: #081C15;
+    transition: background-color 0.3s ease;
+}   
+
+.menu a:active {
+    background-color: #98aa9a;
+    color: #081C15;
 }
 
-.card {
-    max-width: 400px;
-    padding:40px;
-    margin: 30px auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px gray;
-    transition: transform 0.3s, background-color 0.3s ease;
+.card{
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto 15px auto;
+    display: block;
+    border-radius: 5px;
     text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
 }
 
-.card img{
-    max-width:380px;
-    width:90%;
-    height:auto;
-    margin: 0 auto;
-    border-radius:10px;
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card h5, .card h6 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card img {
+    width: 90%;
+    height: auto;
+    border-radius: 5px;
+    margin: 5px auto 15px auto;
     display: block;
 }
 
-.card:hover{
-    transform: scale(1.05);
+.card .summary{
+    text-align: justify;
+    margin-top: 5px;
 }
 
 .series-card{
-    color:#fde74c;
-    background-color: #e55934;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: #F28482;
+    color: #1a1a2e;
 }
 
-.series-card li{
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-    height: auto;
-    width: auto;
-    max-width: 97%;
-    background-color: #fde74c;
-    box-sizing:border-box;
-    margin: 10px 20px 10px 10px;
-    padding:5px;
-    border-radius:5px;
+.series-card h5 {
+    font-size: 18px;
 }
 
-.series-card a {
-    height: auto;
-    width: auto;
-    max-width: 100%;
-    box-sizing:border-box;
+.series-card .series-parts {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1a1a2e;
+    margin-top: 10px;
 }
 
-.series-card a:hover{
-    transform: scale(1.1); /*I don't think i like this style, change all the hovers later*/
+.series-card a{
+    background-color: #1a1a2e;
+    color: #F28482;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 2px;
+    transition: transform 0.3s ease;
 }
 
-.series-card a:active{
-    /*I don't know yet*/
-}
-
-.series-card a:link{
-    text-decoration:none; /*why can't i get rid of the dots??*/
-    color: #e55934;
-    background-color: #fde74c;
+.series-card a:link {
+    text-decoration: none;
 }
 
 .series-card a:visited {
- color: #fde74c;
-    background-color: #e55a34e3;
+    text-decoration: none;
+    background-color: #bb5b59;
+    color: #3d0000;
 }
 
-.work-card,.index {
-    color:#7B542F;
-    background-color: #FFCF71;
-    font-family: 'Courier New', Courier, monospace;
+.series-card a:hover {
+    background-color: #b86563;
+    color: #3d0000;
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
 
-.index {
-    margin: 15px auto;
-    max-width: 400px;
-    padding:40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px gray;
-    transition: transform 0.3s, background-color 0.3s ease;
+.series-card a:active {
+    background-color: #b86563;
+    color: #3d0000;
 }
 
-.index p {
-    text-align:center;
-    font-weight: bold;
+.work-card h6 {
+    font-size: 16px;
 }
 
+.work-card {
+    background-color: #F5CAC3;
+    color: #081C15;
+}
